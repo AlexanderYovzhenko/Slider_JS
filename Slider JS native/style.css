@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: rgb(68,6,176);
+    background: linear-gradient(90deg, rgba(68,6,176,0.30210772833723654) 0%, rgba(41,188,204,0.5128805620608899) 50%, rgba(80,199,85,1) 100%);
+}
+
+.wrapper {
+    width: 90vw;
+    height: 90vh;
+    margin: 3% auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.slides {
+    transition: all 1.1s linear;   
+}
+
+img {
+    max-width: 100%;  
+}
+
+.prev, .next {
+    cursor: pointer;
+    outline: none;
+    caret-color: transparent;
+    text-decoration: none;
+    color: red;
+    font-size: 80px;
+    position: absolute;
+    top: 0;
+}
+.prev {
+    left: 10%;
+}
+.next {
+    left: 85%;
+}
+
+.prev:active, .next:active {
+    color: greenyellow;
+    transform: scale(70%);
+} 
