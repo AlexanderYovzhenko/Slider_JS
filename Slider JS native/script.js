@@ -1,74 +1,70 @@
-const slides = document.querySelectorAll('.slides');
+const slides = document.querySelectorAll('.slides img');
 const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
-let index = 0;
-let beforeIndex = 0;
+let currentSlide = 0;
+let nextSlide = 0;
 let correctClick = true;
 
-fadesSlides();
-slides[index].style.display = 'block';
-function fadesSlides() {
-    slides.forEach(element => {
-        element.style.display = 'none';
-    });
-}
 
-if(correctClick === true) {
-    prev.addEventListener('click', () => {
+prev.addEventListener('click', () => {
+    if(correctClick === true) {
         correctClick = false;
-        switchingSlides(-1);
+        checkingCurrentSlide(-1);
         switchingSlidesPrev();
-    });
-    next.addEventListener('click', () => {
+    } 
+});
+prev.click();
+next.addEventListener('click', () => {
+    if(correctClick === true) {
         correctClick = false;
-        switchingSlides(1);
+        checkingCurrentSlide(1);
         switchingSlidesNext();
-    });
-}
+    } 
+});
 
-function switchingSlides(ind) {
-    index += ind;
-    if(index >= slides.length) {
-        index = 0;
+
+function checkingCurrentSlide(index) {
+    currentSlide += index;
+    if(currentSlide >= slides.length) {
+        currentSlide = 0;
     }
-    if(index < 0) {
-        index = slides.length - 1;
+    if(currentSlide < 0) {
+        currentSlide = slides.length - 1;
     }       
 }
 
 function switchingSlidesPrev() {
-    if(index === slides.length - 1) {
-        beforeIndex = 0;
+    if(currentSlide === slides.length - 1) {
+        nextSlide = 0;
     } else {
-        beforeIndex = index + 1;
+        nextSlide = currentSlide + 1;
     }
-   
-    slides[beforeIndex].style.transform = 'translate(-120%)';
-    setTimeout(() => {
-        slides[index].style.display = 'block';  
-        slides[beforeIndex].style.display = 'none'; 
-        slides[index].style.transform = 'translate(120%)';
-        setTimeout(() => {
-            slides[index].style.transform = 'translate(0)';
-            correctClick = true; 
-        }, 100);   
-    }, 1100);    
+    slides.forEach(slide => {
+        slide.style.opacity = '0';
+        slide.style.transform = 'translate(100%)';
+    });
+    
+    slides[currentSlide].style.opacity = '1';
+    slides[nextSlide].style.opacity = '1';
+    slides[nextSlide].style.transform = 'translate(-100%)';
+    slides[currentSlide].style.transform = 'translate(0)';
+    setTimeout(() => correctClick = true ,1000);
 }
 
 function switchingSlidesNext() {
-    if(index === 0) {
-        beforeIndex = slides.length - 1;
+    if(currentSlide === 0) {
+        nextSlide = slides.length - 1;
     } else {
-        beforeIndex = index - 1; 
-    }
-    slides[beforeIndex].style.transform = 'translate(120%)';
-    setTimeout(() => {
-        slides[index].style.display = 'block';  
-        slides[beforeIndex].style.display = 'none'; 
-        slides[index].style.transform = 'translate(-120%)';
-        setTimeout(() => {
-            slides[index].style.transform = 'translate(0)';
-            correctClick = true;  
-        }, 100);   
-    }, 1100);    
+        nextSlide = currentSlide - 1; 
+    } 
+    slides.forEach(slide => {
+        slide.style.opacity = '0';
+        slide.style.transform = 'translate(-100%)';
+    });
+    
+    slides[currentSlide].style.opacity = '1';
+    slides[nextSlide].style.opacity = '1';
+    slides[nextSlide].style.transform = 'translate(100%)';
+    slides[currentSlide].style.transform = 'translate(0)';
+    setTimeout(() => correctClick = true ,1000);  
 }

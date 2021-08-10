@@ -6,20 +6,19 @@ body {
     background: linear-gradient(90deg, rgba(68,6,176,0.30210772833723654) 0%, rgba(41,188,204,0.5128805620608899) 50%, rgba(80,199,85,1) 100%);
 }
 
-.wrapper {
-    width: 90vw;
+.slider-wrapper {
+    width: 70vw;
     height: 90vh;
     margin: 3% auto;
     position: relative;
     overflow: hidden;
 }
 
-.slides {
-    transition: all 1.1s linear;   
-}
-
-img {
-    max-width: 100%;  
+img {  
+    position: absolute; 
+    transition: transform 1s linear;
+    max-width: 100%;
+    height: auto;  
 }
 
 .prev, .next {
